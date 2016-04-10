@@ -11,7 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script>
 (function() {
-
+var num='';
+var answer='';
    
 
 
@@ -21,21 +22,38 @@ var app = angular.module('myApp', []);
 app.controller('customersCtrl', function($scope, $http) {
 	$http.get("userController/test.do")
 	.success(function(response) {$scope.names = response.data;});
+
+	 $scope.next = function(x,y) {
+        num=num+";"+y.id;
+        answer=answer+";"+x;
+        console.log(num);
+        console.log(answer);
+var i= $("#t1").val()+$("#t2").val();
+console.log(y.length);
+        // var i= $("#t1").val();
+// alert(a);
+    }   ;
+    $scope.next3 = function(x) {
+    	console.log(x.id+"p");
+    	if(x.id==''){
+    		alert("考试完成");
+    	}
+    	for(var j=1;j<=x.id;j++){
+    		$("#"+j).hide();
+    	}
+var i=x.id+1;
+$("#"+i).show();
+    }
 });
 
-$scope.a = function($event, id){
-	alert(id);
-        //  var checkbox = $event.target;
-        // var action = (checkbox.checked?'add':'remove');
-        // updateSelected(action,id,checkbox.name);
-   }
 })();
 
 </script>
 <script type="text/javascript"> 
-$(function(){ 
-
-}); 
+function next4(){
+$("#1").show();
+    		$("#r5").hide();
+}
 </script> 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,28 +61,28 @@ $(function(){
 </head>
 <body ng-app="myApp" ng-controller="customersCtrl" style="    background-color: #488FAB;">
 <div>
-<li ng-repeat="x in names">
-      <div  id="{{ x.id }}"> 
+	  <input style="display:none" id="yy" value="{{names.lenth}}">
+
+<button id="r5" onclick="next4();">开始答题</button>
+
+<li ng-repeat="x in names" style="list-style-type:none;">
+
+      <div  id="{{ x.id }}" style="display:none"> 
       	{{x.timu}}
 
-   <br><input type="radio" ng-model="color.name" value="a">{{x.a}} 
-   <br><input type="radio" ng-model="color.name" value="b">{{x.a}} 
-   <br><input type="radio" ng-model="color.name" value="c">{{x.a}} 
-   <br><input type="radio" ng-model="color.name" value="d">{{x.a}} 
+<br><input type="checkbox" ng-model="a"  ng-true-value="'a'"  ng-false-value="''"> {{x.a}}
+<br><input type="checkbox" ng-model="b"  ng-true-value="'b'"  ng-false-value="''"> {{x.b}}
+<br><input type="checkbox" ng-model="c"  ng-true-value="'c'"  ng-false-value="''"> {{x.c}}
+<br><input type="checkbox" ng-model="d"  ng-true-value="'d'"  ng-false-value="''"> {{x.d}}
+<br>
+<button ng-click="next(a+b+c+d,x);next3(x);">下一题</button>
 
-<br><input type="checkbox" ng-model="a" value="111"> {{x.b}}
-<br><input type="checkbox" ng-model="b"  ng-true-value="'a'"  ng-false-value="'b'"> {{x.b}}
+<br>
+  <input style="display:none" id="t{{x.id}}" value="{{a}}{{b}}{{c}}{{d}}">你选择的答案 = {{a}}{{b}}{{c}}{{d}}</tt><br/>
 
- <tt>color = {{color.name | json}}</tt>
-<br/>
-   <tt>value1 = {{a | json}}</tt><br/>
-  <tt>value2 = {{b}}</tt><br/>
-<!--       	<br><input type="checkbox" name="{{x.id}}" id="cb1"  	  ng-click="a($event,x.id)"> {{x.a}} 
-      	<br><input type="checkbox" name="{{x.id}}" id="cb2"> {{x.b}}
-      	<br><input type="checkbox" name="{{x.id}}" id="cb3"> {{x.c}}
-      	<br><input type="checkbox" name="{{x.id}}" id="cb4"> {{x.d}}  -->
       </div>
     </li>
+
 </div>
 
 </body>
