@@ -43,13 +43,13 @@ public class UserController
 	{
 		Returntype text=new Returntype();
 		List<Tm> u = us.getTm();
-		
-			ReturnUtil.fix(text,"_KEYS_s04");
-			text.setData(u);
-			return text;  
-	
+
+		ReturnUtil.fix(text,"_KEYS_s04");
+		text.setData(u);
+		return text;  
+
 	}
-	
+
 	@RequestMapping("/submit")
 	@ResponseBody  
 	public Object submit(String id,String answer, HttpServletRequest req)
@@ -58,37 +58,40 @@ public class UserController
 		List<Tm> u = us.getTm2();
 		String[] i=id.split(";");
 		String[] j=answer.split(";");
-
-		 int[] k;
-		 k=new int[200];
-		int l=0;
+		String wrong = "";
+		int index=1;
 		int p1;
 		int p2;
 		String p3;
 		String p4;
 		for(int p=0;p<i.length;p++){
-for(int q=0;q<i.length;q++){
-	 p1=u.get(q).getId();
-	 p2=Integer.valueOf(i[p]);
-	 p3=u.get(q).getZhengque();
-	 p4=j[p];
-	if(p1==p2){
-		if(p3==p4){
-			
+			for(int q=0;q<i.length;q++){
+				p1=u.get(q).getId();
+				p2=Integer.valueOf(i[p]);
+				p3=u.get(q).getZhengque();
+				p4=j[p];
+				if(p1==p2){
+					if(p3.equals(p4)){
+					}
+					else{
+						if(index==1){
+							wrong=""+u.get(q).getId();
+							index=2;
+						}
+						else{
+							wrong=wrong+";"+u.get(q).getId();
+						}
+						
+					}
+				}
+			}
 		}
-		else{
-			k[l]=u.get(q).getId();
-			l++;
-		}
+		ReturnUtil.fix(text,"_KEYS_s04");
+		text.setData(wrong);
+		return text;  
+
 	}
-}
-		}
-			ReturnUtil.fix(text,"_KEYS_s04");
-			text.setData(k);
-			return text;  
-	
-	}
-	
+
 	@RequestMapping("/deleteUser")
 	@ResponseBody  
 	public Object deleteUser(String id, HttpServletRequest req)
@@ -107,7 +110,7 @@ for(int q=0;q<i.length;q++){
 			return text;  
 		}
 	}
-	
+
 
 
 
@@ -134,20 +137,20 @@ for(int q=0;q<i.length;q++){
 		}
 
 		else{
-				Integer i=0;
-				i=us.insertUserAndPassword(role);
-				if(i==1){
-					ReturnUtil.fix(text,"_KEYS_s02");
-					return text;  
-				}
-				else{
-					ReturnUtil.fix(text,"_KEYS_f03");
-					return text;  
-				}
+			Integer i=0;
+			i=us.insertUserAndPassword(role);
+			if(i==1){
+				ReturnUtil.fix(text,"_KEYS_s02");
+				return text;  
+			}
+			else{
+				ReturnUtil.fix(text,"_KEYS_f03");
+				return text;  
+			}
 		}
 	}
 
-	
+
 	public UserService getUs() {
 		return us;
 	}
