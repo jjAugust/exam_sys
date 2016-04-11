@@ -2,6 +2,7 @@ package org.zt.ssmm.service;
 
 import java.util.List;
 
+import org.zt.ssmm.core.Ctj;
 import org.zt.ssmm.core.Tm;
 import org.zt.ssmm.core.User;
 
@@ -16,4 +17,6 @@ public interface UserService
 	User selectByNamePWD(User role);
 	List<Tm> getTm();
 	List<Tm> getTm2();
+	int insertctj(Ctj cp);
+	String getWrongList(int  id);
 }

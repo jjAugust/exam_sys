@@ -6,11 +6,12 @@
     <result column="name" property="name" jdbcType="CHAR" />
     <result column="password" property="password" jdbcType="CHAR" />
     <result column="birthdate" property="birthdate" jdbcType="TIMESTAMP" />
+    <result column="occupation" property="occupation" jdbcType="CHAR" />
   </resultMap>
   
 
   <sql id="Base_Column_List" >
-    id, name, password, birthdate
+    id, name, password, birthdate,occupation
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -120,6 +121,13 @@
   </select>   
    <select id="getTm2" resultType="org.zt.ssmm.core.Tm">
   	select t.id,t.timu,t.a,t.b,t.c,t.d,t.zhengque from tm t;
+  </select>
+   <insert id="insertctj" parameterType="org.zt.ssmm.core.Ctj" >
+    insert into ctj(user_id,wrong_list,create_time)
+    values (#{user_id},#{wrong},NOW())
+  </insert>
+     <select id="getWrongList" resultType="java.lang.String" parameterType="java.lang.Integer">
+ select t.wrong_list from ctj t WHERE t.user_id=#{id}   order by t.create_time desc limit 1
   </select>
   
   <resultMap id="UserResultMap" type="org.zt.ssmm.core.User" extends="BaseResultMap">

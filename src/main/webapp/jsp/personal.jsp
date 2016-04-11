@@ -42,7 +42,7 @@ app.controller('customersCtrl', function($scope, $http) {
 			姓名：{{names.name}}
 		</div>
 		<div>
-			生日：{{names.birthdate}}
+			生日：{{names.birthdate|  date:'yyyy-MM-dd '}}
 		</div>
 		<div>
 			学院：{{names.occupation}}

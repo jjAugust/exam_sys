@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zt.ssmm.core.Ctj;
 import org.zt.ssmm.core.Tm;
 import org.zt.ssmm.core.User;
 import org.zt.ssmm.dao.UserMapper;
@@ -23,6 +24,19 @@ public class UserServiceImpl implements UserService
 	public List<Tm> getTm() 
 	{
 		return userMapper.getTm();
+	}
+	
+	@Override
+	public int	insertctj(Ctj cp)
+	{
+		return userMapper.insertctj(cp);
+	}
+	
+	@Override
+	public String	getWrongList(int  id)
+
+	{
+		return userMapper.getWrongList(id);
 	}
 	
 	@Override

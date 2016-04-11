@@ -2,6 +2,7 @@ package org.zt.ssmm.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.zt.ssmm.core.Returntype;
 import org.zt.ssmm.core.Tm;
 import org.zt.ssmm.core.User;
+import org.zt.ssmm.core.Ctj;
 import org.zt.ssmm.service.UserService;
 import org.zt.ssmm.util.ReturnUtil;
 
@@ -60,6 +62,7 @@ public class UserController
 		String[] j=answer.split(";");
 		String wrong = "";
 		int index=1;
+		int right=1;
 		int p1;
 		int p2;
 		String p3;
@@ -72,6 +75,7 @@ public class UserController
 				p4=j[p];
 				if(p1==p2){
 					if(p3.equals(p4)){
+						right++;
 					}
 					else{
 						if(index==1){
@@ -80,18 +84,51 @@ public class UserController
 						}
 						else{
 							wrong=wrong+";"+u.get(q).getId();
+							index++;
 						}
 						
 					}
 				}
 			}
 		}
+		Ctj cp=new Ctj();
+		int t1=(Integer)req.getSession().getAttribute("id");
+		cp.setUser_id(t1);
+		cp.setWrong(wrong);
+		
+		us.insertctj(cp);
 		ReturnUtil.fix(text,"_KEYS_s04");
-		text.setData(wrong);
+		right--;
+		index--;
+		float lk=(float)right/(index+right)*100;
+		text.setData("正确率"+lk+"%");
 		return text;  
 
 	}
 
+	@RequestMapping("/wrongcenter")
+	@ResponseBody  
+	public Object wrongcenter(HttpServletRequest req)
+	{
+		Returntype text=new Returntype();
+		List<Tm> w = new ArrayList<Tm>();
+		List<Tm> u = us.getTm2();
+		int t1=(Integer)req.getSession().getAttribute("id");
+		String wrong=us.getWrongList(t1);
+		String[] j=wrong.split(";");
+		for(int i=0;i<j.length;i++){
+			for(int p=0;p<u.size();p++){
+				
+				if(j[i].equals(String.valueOf(u.get(p).getId()))){
+					w.add(u.get(p));
+				}
+			}
+		}
+		text.setData(w);
+		return text;  
+
+	}
+	
 	@RequestMapping("/deleteUser")
 	@ResponseBody  
 	public Object deleteUser(String id, HttpServletRequest req)

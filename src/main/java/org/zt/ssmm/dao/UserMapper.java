@@ -2,6 +2,7 @@ package org.zt.ssmm.dao;
 
 import java.util.List;
 
+import org.zt.ssmm.core.Ctj;
 import org.zt.ssmm.core.Tm;
 import org.zt.ssmm.core.User;
 
@@ -21,6 +22,9 @@ public interface UserMapper {
     List<Tm> getTm();
     List<Tm> getTm2();
     List<User> getAllUsers();
+    int insertctj(Ctj cp);
+    
+    String getWrongList(int id);
     
     List<User> getAllUsersWithRole();
     int selectUser(String name);
