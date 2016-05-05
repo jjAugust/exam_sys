@@ -21,7 +21,7 @@ var id = '<%=session.getAttribute("id")%>';
 
 var app = angular.module('myApp', []);
 app.controller('customersCtrl', function($scope, $http) {
-    $http.get("userController/test.do?part=1")
+    $http.get("userController/test.do?part=3")
     .success(function(response) {$scope.names = response.data;});
 
      $scope.next = function(x,y) {
@@ -84,10 +84,7 @@ $("#r5").hide();
 <div>
 
 
-<!-- <button id="r5" onclick="next4();">开始答题</button> -->
-<button id="r5" onclick="location='jsp/exam2.jsp'">科目1</button>
-<button id="r5" onclick="location='jsp/exam3.jsp'">科目2</button>
-<button id="r5" onclick="location='jsp/exam4.jsp'">科目3</button>
+<button id="r5" onclick="next4();">开始答题</button>
         <input id="t33" value="{{names[0].id}}" style="display:none">
 
 <li ng-repeat="x in names" style="list-style-type:none;">

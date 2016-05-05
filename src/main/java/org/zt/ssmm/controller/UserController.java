@@ -41,10 +41,10 @@ public class UserController
 
 	@RequestMapping("/test")
 	@ResponseBody  
-	public Object test(String id, HttpServletRequest req)
+	public Object test(String part, HttpServletRequest req)
 	{
 		Returntype text=new Returntype();
-		List<Tm> u = us.getTm();
+		List<Tm> u = us.getTm(part);
 
 		ReturnUtil.fix(text,"_KEYS_s04");
 		text.setData(u);

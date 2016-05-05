@@ -15,7 +15,7 @@ public interface UserService
 	int insertUserAndPassword(User role);
 	int selectUser(String name);
 	User selectByNamePWD(User role);
-	List<Tm> getTm();
+	List<Tm> getTm(String part);
 	List<Tm> getTm2();
 	int insertctj(Ctj cp);
 	String getWrongList(int  id);

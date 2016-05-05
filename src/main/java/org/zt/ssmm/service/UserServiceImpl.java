@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService
 		return userMapper.selectByPrimaryKey(id);
 	}
 	@Override
-	public List<Tm> getTm() 
+	public List<Tm> getTm(String part) 
 	{
-		return userMapper.getTm();
+		return userMapper.getTm(part);
 	}
 	
 	@Override

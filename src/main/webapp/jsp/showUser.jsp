@@ -26,6 +26,8 @@ text-decoration:none;
     <div><a href="jsp/personal.jsp" target="main">个人信息</a></div>
 <div><a href="jsp/exam.jsp" target="main">考试中心</a></div>
 <div><a href="jsp/wrongCenter.jsp" target="main">错题中心</a></div>
+<div><a href="jsp/wrongCenter.jsp" target="main">复习中心</a></div>
+<div><a href="" >退出登录</a></div>
 </div>
 <div style="
     position: relative;

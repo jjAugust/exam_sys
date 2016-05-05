@@ -19,7 +19,7 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
-    List<Tm> getTm();
+    List<Tm> getTm(String part);
     List<Tm> getTm2();
     List<User> getAllUsers();
     int insertctj(Ctj cp);

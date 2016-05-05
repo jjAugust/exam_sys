@@ -281,6 +281,7 @@ var wait=60;
   {
     alert('请输入正确的手机号码');
     wait=0;
+    return;
  }
     $.ajax({
         url: "userController/addUser.do", 
@@ -303,18 +304,15 @@ var wait=60;
 
 
 </script>
-<form  action="" method="post">
-    <!-- <form  name="ceshi" method="post"> -->
 
     <input type="text" id="name" name="name" placeholder="name" value="" required>
     <input type="text" id="phone" name="phone" placeholder="PhoneNumber" value="" required>
     <input type="password" id="password" name="password" placeholder="password" value="" required>
-    <input type="date" id="birthdate" name="birthdate" placeholder="birthday" value="" required>
     <input type="text" id="occupation" name="occupation" placeholder="occupation" value="" required>
+    <input type="date" id="birthdate" name="birthdate" placeholder="birthday" value="" required>
 
 <button  onclick="add();"><i class="fa fa-arrow-right"></i></button>
     </tr><br>
-</form>
 </div>
 </div>
 </body></html>

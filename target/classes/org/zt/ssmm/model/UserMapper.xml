@@ -116,8 +116,8 @@
   	select * from user
   </select>
   
-    <select id="getTm" resultType="org.zt.ssmm.core.Tm">
-  	select t.id,t.timu,t.a,t.b,t.c,t.d from tm t;
+    <select id="getTm" resultType="org.zt.ssmm.core.Tm" parameterType="java.lang.String">
+  	select t.id,t.timu,t.a,t.b,t.c,t.d from tm t where t.part=#{part,jdbcType=CHAR};
   </select>   
    <select id="getTm2" resultType="org.zt.ssmm.core.Tm">
   	select t.id,t.timu,t.a,t.b,t.c,t.d,t.zhengque from tm t;
