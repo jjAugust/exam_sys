@@ -58,10 +58,44 @@ public class UserController
 	{
 		Returntype text=new Returntype();
 		List<Tm> u = us.getTm2();
+		List<Tm> u2 =new ArrayList<Tm>(); 
+		
 		String[] i=id.split(";");
 		String[] j=answer.split(";");
 		String wrong = "";
-		int index=1;
+		int fir=1;
+		int index=0;
+		int p2=0,p3=0;
+for(String p1:i){
+    Tm u3 =new Tm();
+    u3.setId(Integer.valueOf(p1));
+    u3.setZhengque(j[index]);
+    index++;
+    u2.add(u3);
+}
+for(Tm t2: u2){
+    for(Tm t1:u)  {
+        if(t2.getId()==t1.getId()){
+            if(t2.getZhengque()==t1.getZhengque()){
+                p2++;
+            }
+            else{
+                p3++;
+                if(fir==1){
+                    wrong=wrong+";"+t2.getId();
+                    index=2;
+                }
+                else{
+                    wrong=wrong+";"+t2.getId();
+                    fir++;
+                } 
+            }
+        }
+    }
+}
+		
+		System.out.println(wrong);
+		/*int index=1;
 		int right=1;
 		int p1;
 		int p2;
@@ -90,7 +124,11 @@ public class UserController
 					}
 				}
 			}
-		}
+		}*/
+		
+		
+		
+		
 		Ctj cp=new Ctj();
 		int t1=(Integer)req.getSession().getAttribute("id");
 		cp.setUser_id(t1);
@@ -98,9 +136,9 @@ public class UserController
 		
 		us.insertctj(cp);
 		ReturnUtil.fix(text,"_KEYS_s04");
-		right--;
-		index--;
-		float lk=(float)right/(index+right)*100;
+//		right--;
+//		index--;
+		float lk=(float)p2/(p2+p3)*100;
 		text.setData("正确率"+lk+"%");
 		return text;  
 
